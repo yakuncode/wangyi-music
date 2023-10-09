@@ -1,0 +1,22 @@
+.login-wrapper {
+  width: 647px;
+  height: 350px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  padding: 24px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  .submit-btn {
+    width: 200px;
+  }
+  .line {
+    width: 1px;
+    background-color: #282c34;
+    margin: 0 36px;
+  }
+}

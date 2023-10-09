@@ -1,0 +1,24 @@
+.phone-title {
+  text-align: left;
+  font: {
+    size: 16px;
+    weight: 500;
+  };
+  margin-bottom: 16px;
+}
+.phone {
+  width: 320px;
+}
+.password {
+  width: 320px;
+}
+.utils-btn {
+  display: flex;
+  justify-content: space-between;
+  .sign-in {
+    width: 151px;
+  }
+  .sign-up {
+    width: 151px;
+  }
+}

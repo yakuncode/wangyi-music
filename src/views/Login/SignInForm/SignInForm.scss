@@ -1,0 +1,41 @@
+.phone-title {
+  text-align: left;
+  font: {
+    size: 16px;
+    weight: 500;
+  };
+  margin-bottom: 16px;
+}
+.phone {
+  width: 320px;
+}
+.password {
+  width: 320px;
+}
+.submit {
+  width: 320px;
+}
+.other {
+  display: flex;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  .title {
+    margin-right: 6px;
+  }
+  .other-login {
+    display: flex;
+    flex: 1;
+    text-align: right;
+    justify-content: space-between;
+    .wechat {
+      color:  #1AAD19;
+    }
+    .weibo {
+      color: #E6162D;
+    }
+  }
+}
+.email-login {
+  cursor: pointer;
+}

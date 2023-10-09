@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  height: 64px;
+  padding: 0 20px;
+  min-width: 1200px;
+  line-height: 64px;
+  border-bottom: 1px solid #d9d9d9;
+  .header-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 200px;
+    height: 100%;
+    line-height: 80px;
+    .header-logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+  }
+}

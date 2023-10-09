@@ -1,0 +1,30 @@
+.phone-title {
+  text-align: left;
+  font: {
+    size: 16px;
+    weight: 500;
+  };
+  margin-bottom: 16px;
+}
+.phone {
+  width: 320px;
+}
+.password {
+  width: 320px;
+}
+.submit {
+  width: 320px;
+}
+.captcha {
+  font: {
+    size: 14px;
+    weight: 500;
+  };
+  .captcha-action {
+    cursor: pointer;
+  }
+  .captcha-hourglass {
+    font-weight: 100;
+    font-family: 'Microsoft YaHei', sans-serif;
+  }
+}
