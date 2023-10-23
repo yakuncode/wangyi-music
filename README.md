@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# 项目说明
+  此项目仅用于广大前端人事共同学习之用, 不做商业用途.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 技术栈
+  此项目使用react18 + react-dom-router + scss + redux + axios + antd 完成基本架构, 未使用项目后期补充...
 
-## Available Scripts
+##### 项目整体思路
+1. 登录方式: 验证码登录/账号密码登录/二维码登录三种方式, 抛弃游客登录方式
+2. 登录状态维持, token时长维持在一个月左右, 尽量长的维持状态让使用者减少反复登录带来的复杂度.
+3. 页面主要功能维护三大块, 传统发现音乐, 歌单, mv, 我的中心, 其他不相关模块无需关系, 保持播放器纯粹.
 
-In the project directory, you can run:
+##### 风格指南
 
-### `npm start`
+###### html部分
+1. 复杂判断单独整理方法存放到tsx中, 请勿直接在模版中书写大量判断逻辑
+2. 样式对齐, tab整体为2个单位
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+###### css部分
+1. 非必要请勿使用内联样式, 标签选择器, 请使用id选择器, 类选择器进行样式的调整
+2. 命名方式统一为短横线命名法, 例如: content-title, 请勿使用content_title或者contentTitle下划线命名或者小驼峰命名法.
+3. css命名要符合语义规范, 禁止使用无意义命名. a1,b1, box 这些.
+4. 嵌套要有层次感, 每个大的元素下的小元素需要使用空格跟其他元素分开
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+.content {
+  display: flex;
 
-### `npm test`
+  .content-txt {
+    font-size: 12px;
+  }
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  .content-tip {
+    margin-right: 2px;
+  }
+}
+```
+###### js部分
+1. 对ts部分前期要求不是很严格, 后期需要规范使用ts.
+2. 禁止在模版以及代码中使用硬编码, 减少维护风险.
+```
+bad
+  isEdit === 1
+god
+  const editTypeMap = {
+    edit: 1
+  }
+  isEdit === editTypeMap.edit
+```
+3. 禁止使用相等, 请使用全等替代
+4. 代码结尾无需增加;, 对象里最后一个元素无需增加,结尾, 函数名和入参之间使用空格和大括号之前使用空格隔开.
+5. 关键代码需要加上注释, 变量模块划分清晰, 模块之前增加空格增加区域感.
