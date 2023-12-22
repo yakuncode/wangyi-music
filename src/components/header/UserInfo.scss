@@ -1,0 +1,13 @@
+.userinfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .nickname {
+    margin-right: 10px;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}

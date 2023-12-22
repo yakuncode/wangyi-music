@@ -1,4 +1,8 @@
+// src/common/request.ts
+
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { store } from '@/store'
+
 class Request {
   private readonly baseURL: string;
   private readonly timeout: number;
@@ -8,12 +12,28 @@ class Request {
     this.timeout = 1000 * 60 * 5; // 五分钟
   }
 
-  setInterceptor = ({ instance }: { instance: AxiosInstance }) => {
+  private getUserInfoFromRedux(): any {
+    return store.getState().user?.userInfo;
+  }
+
+  private setInterceptor = ({ instance }: { instance: AxiosInstance }) => {
     instance.interceptors.request.use(
-      (config) => config,
+      (config) => {
+        // 获取 Redux 中的用户信息
+        const userInfo = this.getUserInfoFromRedux();
+
+        // 手动添加 cookie
+        if (userInfo && userInfo.cookie) {
+          if (config.method === 'GET') {
+            config.params = { ...(config.params || {}), cookie: userInfo.cookie };
+          } else {
+            config.data = { ...(config.data || {}), cookie: userInfo.cookie };
+          }
+        }
+        return config;
+      },
       (error: AxiosError) => Promise.reject(error)
     );
-
     instance.interceptors.response.use(
       (res: AxiosResponse) => {
         if (res.config.method === 'delete') {
@@ -52,10 +72,11 @@ class Request {
         return Promise.reject({ message: msg, status: error.response?.status });
       }
     );
+
+    // ... 其他拦截器逻辑
   };
 
-
-  handleHeader = () => {
+  private handleHeader = () => {
     return {
       'Content-Type': 'application/json;charset=UTF-8',
       token: undefined,
@@ -63,13 +84,13 @@ class Request {
     };
   };
 
-  request<T>(config: AxiosRequestConfig): Promise<T> {
+  public request<T>(config: AxiosRequestConfig): Promise<T> {
     const instance: AxiosInstance = axios.create();
     config = {
       data: {},
       params: {},
       timeout: this.timeout,
-      baseURL: 'http://localhost:3000',
+      baseURL: 'http://localhost:4000',
       withCredentials: true,
       ...config,
     };
@@ -80,11 +101,10 @@ class Request {
     return instance(config);
   }
 
-  upload(url: string, baseURL: string = this.baseURL): string {
+  public upload(url: string, baseURL: string = this.baseURL): string {
     return `${baseURL}${url}`;
   }
 }
 
-const request: Request = new Request()
+const request: Request = new Request();
 export default request;
-

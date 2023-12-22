@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+// import * as types from '@/store/action-types'
+import { LOGIN } from '@/store/modules/user'
 import { Button, Form, Input, message } from 'antd';
 import './PhoneSignIn.scss';
-import { getCat, signIn } from '../../../../api';
+import { getCat, signIn } from '@/api';
 
 // 定义表单字段类型
 type FieldType = {
@@ -14,15 +17,23 @@ type FieldType = {
 export function PhoneSignIn() {
 	const navigate = useNavigate();
 	const [form] = Form.useForm();
+	const dispatch = useDispatch()
 
 	const onFinish = async (values: any) => {
 		try {
 			// 发起登录请求
 			const response = await signIn({ ...values });
-			const { code } = response as { code: number };
+			const { code, account, bindings, cookie, profile, token } = response as any;
 
 			if (code === 200) {
 				// 登录成功，跳转到 foundMusic 页面
+				dispatch(LOGIN({
+					account,
+					bindings,
+					cookie,
+					profile,
+					token
+				}))
 				navigate('/foundMusic');
 			}
 		} catch (error) {
@@ -111,7 +122,7 @@ export function PhoneSignIn() {
 					rules={[{ required: true, message: '请输入正确的验证码!' }]}
 				>
 					<Input
-						className="captcha"
+						className="captcha-input"
 						size="large"
 						placeholder="请输入验证码"
 						suffix={

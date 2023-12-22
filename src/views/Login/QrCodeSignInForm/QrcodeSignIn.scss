@@ -1,0 +1,13 @@
+.qrcode-wrapper {
+  position: relative;
+  .qrcode {
+    width: 254px;
+    height: 254px;
+    background-color: #c41d7f;
+  }
+  .qrcode-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
