@@ -10,6 +10,11 @@ module.exports = {
       // 约定：使用 @ 表示 src/components 文件所在路径
       "@comp": path.resolve(__dirname, "src", "components"),
     },
+    resolve: {
+      fallback: {
+        "process": require.resolve("process/browser")
+      }
+    }
   }
 }
 

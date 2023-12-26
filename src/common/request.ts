@@ -2,13 +2,15 @@
 
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { store } from '@/store'
+import * as process from 'process'
 
+// console.log(process.env, 'log')
 class Request {
   private readonly baseURL: string;
   private readonly timeout: number;
 
   constructor() {
-    this.baseURL = `${process.env.VUE_APP_BASE_API}`;
+    this.baseURL = `${process.env.REACT_APP_API}`;
     this.timeout = 1000 * 60 * 5; // 五分钟
   }
 
@@ -90,7 +92,7 @@ class Request {
       data: {},
       params: {},
       timeout: this.timeout,
-      baseURL: 'http://localhost:4000',
+      baseURL: process.env.REACT_APP_API,
       withCredentials: true,
       ...config,
     };
