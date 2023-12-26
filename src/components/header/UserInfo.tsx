@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { LOGIN_OUT } from '@/store/modules/user'
 import './UserInfo.scss'
 import type { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
+import { Dropdown, message, Space } from 'antd';
 import { useNavigate }  from 'react-router'
+import { loginOut } from '@/api'
 
 export function UserInfo() {
-	const userInfo = useSelector((state: any) => state.user.userInfo.profile)
+	const userInfo = useSelector((state: any) => state.user.userInfo.profile || {})
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const items: MenuProps['items'] = [
@@ -21,22 +22,33 @@ export function UserInfo() {
 	}
 
 	const handleUSerClick: ActionObject = {
-		'1': (): void => {
-			dispatch(LOGIN_OUT())
-			navigate('/login')
+		'1': async (): Promise<void> => {
+			await loginOuts()
 		}
 	}
+
+	const loginOuts = async () => {
+		const data = await loginOut({}) as { code: number }
+		console.log(data, 'data')
+		if (data.code === 200) {
+			dispatch(LOGIN_OUT())
+			navigate('/login')
+		} else {
+			message.error('请求出错!')
+		}
+	}
+
 	const onClick: MenuProps['onClick'] = ({ key }) => {
 		handleUSerClick[key]()
 	};
 	return (
 		<div className="userinfo">
 			<Dropdown menu={{ items, onClick }}>
-				<a onClick={(e) => e.preventDefault()}>
+				<span onClick={(e) => e.preventDefault()}>
 					<Space>
 						<span className="nickname">{userInfo.nickname}</span>
 					</Space>
-				</a>
+				</span>
 			</Dropdown>
 			<img className="avatar" src={userInfo.avatarUrl} alt=''/>
 		</div>

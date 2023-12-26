@@ -12,3 +12,10 @@ export const signIn = (params: any) => axios.request({
   url: '/login/cellphone',
   params,  // 使用 params 而不是 data
 });
+
+// 退出
+export const loginOut = (params: any) => axios.request({
+  method: 'get',
+  url: '/logout',
+  params,  // 使用 params 而不是 data
+});

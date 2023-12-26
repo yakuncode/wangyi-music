@@ -23,16 +23,13 @@ export function PhoneSignIn() {
 		try {
 			// 发起登录请求
 			const response = await signIn({ ...values });
-			const { code, account, bindings, cookie, profile, token } = response as any;
+			const { code, account, profile } = response as any;
 
 			if (code === 200) {
 				// 登录成功，跳转到 foundMusic 页面
 				dispatch(LOGIN({
 					account,
-					bindings,
-					cookie,
-					profile,
-					token
+					profile
 				}))
 				navigate('/foundMusic');
 			}

@@ -59,7 +59,7 @@ class Request {
             case 403:
               msg = '拒绝访问';
               break;
-            case 404:
+            case 406:
               msg = '请求地址错误';
               break;
             case 500:

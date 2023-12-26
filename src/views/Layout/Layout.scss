@@ -1,4 +1,7 @@
-.home {
-  max-width: 1920px;
-  margin: auto;
+.wrap {
+  background-color: #f2f3f5;
+  .content {
+    //max-width: 1920px;
+    margin: auto;
+  }
 }
